@@ -13,23 +13,24 @@
 
 <script>
 import axios from "axios";
-import { authHeader } from "@/_helpers";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "RoomList",
-  data() {
-    return {
-      rooms: [],
-    };
-  },
+
   methods: {
     goToRoom(id) {
       axios.get(`${process.env.VUE_APP_API_URL}/rooms/ + ${id}`);
     },
+
+    ...mapActions("room", ["fetchRooms"]),
   },
-  mounted() {
-    axios
-      .get(`${process.env.VUE_APP_API_URL}/rooms`, { headers: authHeader() })
-      .then((rooms) => (this.rooms = rooms.data));
+  computed: {
+    ...mapState("room", ["rooms"]),
+  },
+
+  created() {
+    // reset login status
+    this.fetchRooms();
   },
 };
 </script>
