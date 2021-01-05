@@ -1,0 +1,151 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+@-ms-viewport {
+  width: device-width;
+}
+
+body {
+  min-width: 330px;
+  @apply bg-gray-100 overflow-x-hidden;
+}
+
+h1 {
+  @apply text-gray-800 font-black;
+}
+
+h2 {
+  @apply text-gray-700;
+}
+
+h3 {
+  @apply text-gray-700 font-serif;
+}
+
+h4 {
+  @apply text-gray-700 font-serif;
+}
+
+p {
+  @apply text-gray-700;
+}
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write your own custom component styles here */
+
+.background {
+  @apply bg-blue-600;
+}
+
+.dringo-btn {
+  @apply bg-indigo-600 shadow-indigo-2xl rounded-full  text-white hover:bg-white text-lg px-16 py-4 font-bold outline-none focus:outline-none transition duration-500 ease-in-out hover:text-indigo-600 hover:bg-white;
+}
+
+.logo {
+  @apply sm:w-12;
+}
+
+.cta-btn {
+  @apply shadow-orange-2xl text-white bg-blue-600 font-extrabold transition duration-500 ease-in-out;
+}
+
+.cta-btn:focus {
+  @apply outline-none border-transparent;
+}
+.cta-btn:hover {
+  @apply text-blue-600 bg-transparent shadow-orange-2xl cursor-pointer;
+}
+
+.a-animated {
+  @apply text-gray-600 text-lg transition duration-500 ease-in-out;
+}
+.a-animated:hover {
+  @apply text-gray-900;
+}
+
+.brand {
+  @apply text-white transition duration-500 ease-in-out;
+}
+
+.btn-indigo {
+  @apply text-white font-extrabold text-lg bg-indigo-500 transition-colors duration-500 ease-in-out rounded-full shadow-blue-xl;
+}
+
+.btn-indigo:focus {
+  @apply outline-none border-transparent;
+}
+.btn-indigo:hover {
+  @apply text-indigo-500 bg-white;
+}
+
+.input-indigo {
+  @apply rounded-full appearance-none border w-full py-2 px-3 text-gray-700 leading-tight  transition duration-500;
+}
+
+.input-indigo:focus {
+  @apply border-indigo-500 outline-none shadow-indigo-lg;
+}
+
+.form-white {
+  @apply bg-white shadow-2xl rounded-2xl px-8 pt-6 pb-8 mb-4;
+}
+
+.red-shadow {
+  @apply shadow-red-md transition duration-500 ease-in-out;
+}
+
+.red-shadow:hover {
+  @apply shadow-red-2xl;
+}
+
+.blue-shadow {
+  @apply shadow-blue-md transition duration-500 ease-in-out;
+}
+
+.blue-shadow:hover {
+  @apply shadow-blue-2xl;
+}
+
+.yellow-shadow {
+  @apply shadow-yellow-md transition duration-500 ease-in-out;
+}
+
+.yellow-shadow:hover {
+  @apply shadow-yellow-2xl;
+}
+
+.image-card {
+  size: 100%;
+  background-position: center;
+  object-fit: none;
+}
+
+.img-container {
+  height: 50%;
+}
+
+.hero-img {
+  width: 100vw;
+  height: 100vh;
+}
+
+.input {
+  @apply px-3 py-3 text-gray-700 bg-white border-transparent border-2 rounded-2xl transition duration-500 ease-in-out text-sm shadow w-full;
+}
+
+.input:focus {
+  @apply border-blue-600 outline-none;
+}
+
+.input::placeholder {
+  @apply text-gray-500;
+}
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */

@@ -1,0 +1,58 @@
+{
+  "name": "dringo",
+  "version": "0.4.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "serve:ssl": "vue-cli-service serve --https --open --public localhost:8080",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.20.0",
+    "core-js": "^3.6.5",
+    "postcss": "^7.0.35",
+    "postcss-cli": "^8.3.1",
+    "rxjs": "^6.6.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.4.4",
+    "vuex": "^3.6.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.1",
+    "vue-template-compiler": "^2.6.11",
+    "sass": "^1.29.0",
+    "sass-loader": "^7.2.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {},
+    "globals": {
+      "FB": "readonly"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
