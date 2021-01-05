@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import { auth } from "./auth.module";
 import { room } from "./room.module";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -11,4 +12,5 @@ export const store = new Vuex.Store({
     auth,
     room,
   },
+  plugins: [createPersistedState()],
 });

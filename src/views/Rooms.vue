@@ -3,29 +3,71 @@
     <h2 class="text-indigo-500 font-black text-5xl">
       Rooms
     </h2>
-    <div v-for="room in rooms" v-bind:key="room.id" class="m-2">
-      <h3 class="text-indigo-500 font-bold text-xl font-sans">
-        {{ room.name }}
-      </h3>
-    </div>
+    <ul v-for="room in rooms" v-bind:key="room.id" class="m-2">
+      <li class="text-indigo-500 font-bold text-xl font-sans">
+        <a
+          class="hover:text-indigo-800 transition duration-300 ease-in-out hover:no-underline"
+          @click="showModal"
+        >
+          {{ room.name }}</a
+        >
+      </li>
+    </ul>
+    <modal name="passcodeModal">
+      <div class="p-16">
+        <h4 class="text-indigo-500 font-bold text-xl font-sans pb-4">
+          Enter passcode
+        </h4>
+        <div class="pr-32">
+          <input
+            type="password"
+            class="input "
+            placeholder="Password"
+            v-model="passcode"
+          />
+        </div>
+        <div class="text-center mt-6">
+          <button
+            class="dringo-btn"
+            :disabled="passcode"
+            @click.prevent="handleJoinRoom(room.id)"
+          >
+            Enter
+          </button>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import { mapState, mapActions } from "vuex";
 export default {
   name: "RoomList",
+  data() {
+    return {
+      passcode: "",
+    };
+  },
 
   methods: {
-    goToRoom(id) {
-      axios.get(`${process.env.VUE_APP_API_URL}/rooms/ + ${id}`);
+    ...mapActions("room", ["fetchRooms", "emitSocketEvent"]),
+
+    showModal() {
+      this.$modal.show("passcodeModal");
     },
 
-    ...mapActions("room", ["fetchRooms"]),
+    handleJoinRoom(roomId) {
+      this.emitSocketEvent({
+        id: roomId,
+        passcode: this.passcode,
+        token: this.token,
+      });
+    },
   },
   computed: {
     ...mapState("room", ["rooms"]),
+    ...mapState("auth", ["token"]),
   },
 
   created() {

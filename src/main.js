@@ -8,12 +8,14 @@ import { store } from "./_store";
 
 import VueSocketIOExt from "vue-socket.io-extended";
 import io from "socket.io-client";
+import VModal from "vue-js-modal";
 
 Vue.use(Vuex);
 
 const socket = io(`${process.env.VUE_APP_API_URL}`);
 
 Vue.use(VueSocketIOExt, socket, { store });
+Vue.use(VModal);
 
 jwtInterceptor();
 
