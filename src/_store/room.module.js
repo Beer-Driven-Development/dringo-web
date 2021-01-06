@@ -1,6 +1,6 @@
 import axios from "axios";
 import { authHeader } from "@/_helpers";
-
+import $socket from "@/_helpers/socket-instance";
 const state = {
   rooms: [],
   currentRoom: null,
@@ -19,8 +19,8 @@ const actions = {
       });
   },
 
-  emitSocketEvent(data) {
-    this._vm.$socket.client.emit("joinRoom", data);
+  emitJoinRoom(data) {
+    $socket.emit("joinRoom", data);
   },
 };
 

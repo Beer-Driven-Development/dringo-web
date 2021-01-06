@@ -30,7 +30,7 @@
           <button
             class="dringo-btn"
             :disabled="passcode"
-            @click.prevent="handleJoinRoom(room.id)"
+            @click.prevent="handleJoinRoom(54)"
           >
             Enter
           </button>
@@ -51,14 +51,14 @@ export default {
   },
 
   methods: {
-    ...mapActions("room", ["fetchRooms", "emitSocketEvent"]),
+    ...mapActions("room", ["fetchRooms", "emitJoinRoom"]),
 
     showModal() {
       this.$modal.show("passcodeModal");
     },
 
     handleJoinRoom(roomId) {
-      this.emitSocketEvent({
+      this.emitJoinRoom("joinRoom", {
         id: roomId,
         passcode: this.passcode,
         token: this.token,
