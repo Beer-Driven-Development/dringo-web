@@ -15,7 +15,7 @@
     "postcss": "^7.0.35",
     "postcss-cli": "^8.3.1",
     "rxjs": "^6.6.3",
-    "socket.io-client": "^3.0.5",
+    "socket.io-client": "^1.7.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^2.6.11",
     "vue-js-modal": "^2.0.0-rc.6",

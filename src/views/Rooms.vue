@@ -13,6 +13,12 @@
         >
       </li>
     </ul>
+
+    <input v-model="textInput" @keypress.enter="sendMessage" />
+    <button @click="sendMessage(30)">
+      Send
+    </button>
+
     <modal name="passcodeModal">
       <div class="p-16">
         <h4 class="text-indigo-500 font-bold text-xl font-sans pb-4">
@@ -21,7 +27,7 @@
         <div class="pr-32">
           <input
             type="password"
-            class="input "
+            class="input"
             placeholder="Password"
             v-model="passcode"
           />
@@ -30,7 +36,7 @@
           <button
             class="dringo-btn"
             :disabled="passcode"
-            @click.prevent="handleJoinRoom(54)"
+            @click.prevent="sendMessage(30)"
           >
             Enter
           </button>
@@ -42,29 +48,36 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import * as socketio from "../_helpers/socket-instance";
 export default {
   name: "RoomList",
   data() {
     return {
       passcode: "",
+      textInput: "",
+      serverOutput: [],
     };
   },
 
   methods: {
-    ...mapActions("room", ["fetchRooms", "emitJoinRoom"]),
+    ...mapActions("room", ["fetchRooms"]),
 
     showModal() {
       this.$modal.show("passcodeModal");
     },
 
-    handleJoinRoom(roomId) {
-      this.emitJoinRoom("joinRoom", {
-        id: roomId,
-        passcode: this.passcode,
-        token: this.token,
+    sendMessage(roomId) {
+      socketio.sendEvent({
+        type: "joinRoom",
+        data: {
+          id: roomId,
+          passcode: "1234",
+          token: this.token,
+        },
       });
     },
   },
+
   computed: {
     ...mapState("room", ["rooms"]),
     ...mapState("auth", ["token"]),
@@ -73,6 +86,16 @@ export default {
   created() {
     // reset login status
     this.fetchRooms();
+  },
+
+  mounted() {
+    socketio.addEventListener({
+      type: "joinedRoom",
+      callback: (message) => {
+        this.serverOutput.push(message);
+        console.log(this.serverOutput);
+      },
+    });
   },
 };
 </script>
