@@ -38,8 +38,6 @@ export default {
     showModal() {
       this.$modal.show("passcodeModal");
     },
-
-    sendMessage(roomId) {},
   },
 
   computed: {
