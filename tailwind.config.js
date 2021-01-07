@@ -22,7 +22,7 @@ let makeShadow = (name, rgb) => {
 };
 
 module.exports = {
-  purge: ["./components/**/*.js", "./pages/**/*.js"],
+  purge: [],
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
