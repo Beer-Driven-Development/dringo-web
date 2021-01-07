@@ -9,24 +9,7 @@
         v-bind:key="room.id"
         class="text-indigo-500 font-bold text-xl font-sans"
       >
-        <a
-          class="hover:text-indigo-800 transition duration-300 ease-in-out hover:no-underline"
-          @click="showModal()"
-        >
-          {{ room.name }}</a
-        >
-        <input
-          type="password"
-          class="input"
-          placeholder="Password"
-          v-model="passcode"
-        />
-
-        <div class="text-center mt-6">
-          <button class="dringo-btn" @click="sendMessage(room.id)">
-            Enter
-          </button>
-        </div>
+        <RoomItem v-bind="{ room: room, passcode: passcode }" />
       </li>
     </ul>
   </div>
@@ -35,8 +18,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import * as socketio from "../_helpers/socket-instance";
+import RoomItem from "../components/RoomItem";
 export default {
   name: "RoomList",
+  components: {
+    RoomItem,
+  },
   data() {
     return {
       passcode: "",
@@ -52,16 +39,7 @@ export default {
       this.$modal.show("passcodeModal");
     },
 
-    sendMessage(roomId) {
-      socketio.sendEvent({
-        type: "joinRoom",
-        data: {
-          id: roomId,
-          passcode: this.passcode,
-          token: this.token,
-        },
-      });
-    },
+    sendMessage(roomId) {},
   },
 
   computed: {
