@@ -15,26 +15,18 @@
         >
           {{ room.name }}</a
         >
-        <modal name="passcodeModal">
-          <div class="p-16">
-            <h4 class="text-indigo-500 font-bold text-xl font-sans pb-4">
-              Enter passcode
-            </h4>
-            <div class="pr-32">
-              <input
-                type="password"
-                class="input"
-                placeholder="Password"
-                v-model="passcode"
-              />
-            </div>
-            <div class="text-center mt-6">
-              <button class="dringo-btn" @click="sendMessage(room.id)">
-                Enter
-              </button>
-            </div>
-          </div>
-        </modal>
+        <input
+          type="password"
+          class="input"
+          placeholder="Password"
+          v-model="passcode"
+        />
+
+        <div class="text-center mt-6">
+          <button class="dringo-btn" @click="sendMessage(room.id)">
+            Enter
+          </button>
+        </div>
       </li>
     </ul>
   </div>
