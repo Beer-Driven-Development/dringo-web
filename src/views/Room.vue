@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto m-64">
     <h2 class="text-indigo-500 font-black text-5xl">
-      Room
+      {{ this.currentRoom.name }}
     </h2>
   </div>
 </template>
@@ -13,14 +13,13 @@ export default {
 
   data() {
     return {
-      passcode: "",
       textInput: "",
       serverOutput: [],
     };
   },
 
   methods: {
-    ...mapActions("room", ["fetchRooms"]),
+    ...mapActions("room", ["setRoom"]),
 
     showModal() {
       this.$modal.show("passcodeModal");
@@ -28,13 +27,12 @@ export default {
   },
 
   computed: {
-    ...mapState("room", ["rooms"]),
+    ...mapState("room", ["rooms", "currentRoom"]),
     ...mapState("auth", ["token"]),
   },
 
   created() {
-    // reset login status
-    this.fetchRooms();
+    this.setRoom(`${this.$route.params.id}`);
   },
 };
 </script>
