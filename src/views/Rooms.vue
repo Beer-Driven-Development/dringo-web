@@ -45,7 +45,6 @@ export default {
   },
 
   created() {
-    // reset login status
     this.fetchRooms();
   },
 };

@@ -28,29 +28,17 @@
 
 <script>
 import { mapState } from "vuex";
-import * as socketio from "../_helpers/socket-instance";
 export default {
   props: {
     room: null,
     passcode: null,
   },
-  data() {
-    return {
-      roomId: null,
-    };
-  },
+
   computed: {
     ...mapState("auth", ["token"]),
+    ...mapState("room", ["roomId"]),
   },
-  mounted() {
-    socketio.addEventListener({
-      type: "joinedRoom",
-      callback: (message) => {
-        this.roomId = message;
-        console.log(this.roomId);
-      },
-    });
-  },
+
   methods: {
     join() {
       this.$router.push({
@@ -59,15 +47,10 @@ export default {
       });
     },
     sendMessage() {
-      console.log(this.room);
-      console.log(this.passcode);
-      socketio.sendEvent({
-        type: "joinRoom",
-        data: {
-          id: this.room.id,
-          passcode: this.passcode,
-          token: this.token,
-        },
+      this.$socket.client.emit("joinRoom", {
+        id: this.room.id,
+        passcode: this.passcode,
+        token: this.token,
       });
     },
   },
