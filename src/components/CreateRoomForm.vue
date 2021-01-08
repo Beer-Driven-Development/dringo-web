@@ -8,62 +8,44 @@
           >
             <div class="flex-auto p-5 lg:p-10">
               <h4 class="text-2xl font-semibold text-gray-700">
-                Register.
+                Create room.
               </h4>
               <p class="leading-relaxed mt-1 mb-4 text-gray-600"></p>
+
               <div class="relative w-full mb-3">
                 <label
                   class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                  htmlFor="username"
+                  htmlFor="name"
                 >
-                  Username
+                  Name
                 </label>
                 <input
-                  v-model="username"
-                  name="username"
+                  v-model="name"
+                  name="name"
                   type="text"
                   class="input"
-                  placeholder="Username"
+                  placeholder="Name"
                 />
               </div>
               <div class="relative w-full mb-3">
                 <label
                   class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                  htmlFor="email"
+                  htmlFor="passcode"
                 >
-                  Email
+                  Passcode
                 </label>
                 <input
-                  v-model="email"
-                  name="email"
-                  type="email"
-                  class="input"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                  htmlFor="email"
-                >
-                  Password
-                </label>
-                <input
-                  v-model="password"
-                  name="location"
+                  v-model="passcode"
+                  name="passcode"
                   type="password"
                   class="input"
-                  placeholder="Password"
+                  placeholder="Passcode"
                 />
               </div>
 
               <div class="text-center mt-6">
-                <button
-                  class="dringo-btn"
-                  :disabled="status.loggingIn"
-                  @click.prevent="handleRegister"
-                >
-                  Register
+                <button class="dringo-btn" @click.prevent="handleCreateRoom">
+                  Create
                 </button>
               </div>
             </div>
@@ -80,27 +62,24 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      username: "",
-      email: "",
-      password: "",
-      submitted: false,
+      name: "",
+      passcode: "",
     };
   },
   computed: {
     ...mapState("auth", ["status"]),
   },
-  created() {
-    this.logout();
-  },
+  created() {},
   methods: {
-    ...mapActions("auth", ["register", "logout"]),
+    ...mapActions("auth", ["login", "logout"]),
+    ...mapActions("room", ["createRoom"]),
 
-    handleRegister() {
-      this.submitted = true;
-      const { username, email, password } = this;
-      if (username && email && password) {
-        this.register({ username, email, password });
-      }
+    handleCreateRoom() {
+      let payload = {
+        name: this.name,
+        passcode: this.passcode,
+      };
+      this.createRoom(payload);
     },
   },
 };

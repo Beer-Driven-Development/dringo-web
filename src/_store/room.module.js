@@ -13,7 +13,6 @@ const actions = {
       .get(`${process.env.VUE_APP_API_URL}/rooms`, { headers: authHeader() })
       .then((response) => commit("FETCH_ROOMS", response.data));
   },
-
   setRoom({ commit }, room) {
     commit("SET_ROOM", room);
   },
@@ -24,6 +23,18 @@ const actions = {
 
   joinedRoom({ commit }, message) {
     commit("JOINED_ROOM", message);
+  },
+
+  createRoom({ name, passcode }) {
+    axios
+      .post(
+        `${process.env.VUE_APP_API_URL}/rooms`,
+        { name: name, passcode: passcode },
+        {
+          headers: authHeader(),
+        }
+      )
+      .then((response) => console.log(response.data));
   },
 };
 

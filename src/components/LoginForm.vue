@@ -1,12 +1,6 @@
 <template>
   <section id="contact" className="py-8 lg:py-16 xl:py-32 lg:pt-0">
-    <form
-      class="container mx-auto px-4"
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-    >
+    <form class="container mx-auto px-4" name="contact" method="POST">
       <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-6/12 px-4">
           <div

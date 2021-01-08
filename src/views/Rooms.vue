@@ -3,6 +3,16 @@
     <h2 class="text-indigo-500 font-black text-5xl">
       Rooms
     </h2>
+    <div class="container mx-auto m-64 flex justify-around">
+      <router-link
+        :to="`/createRoom`"
+        tag="button"
+        class="bg-indigo-600 hover:bg-indigo-700 rounded-full text-white font-bold text-2xl text-center py-4 px-16"
+      >
+        Create room
+      </router-link>
+    </div>
+
     <ul class="m-2">
       <li
         v-for="room in rooms"

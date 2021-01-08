@@ -6,6 +6,7 @@ import Register from "@/views/Register";
 import Home from "@/views/Home";
 import Rooms from "@/views/Rooms";
 import Room from "@/views/Room";
+import CreateRoom from "@/views/CreateRoom";
 
 Vue.use(Router);
 
@@ -15,7 +16,10 @@ const routes = [
   { path: "/register", component: Register },
   { path: "/rooms", component: Rooms },
   { path: "/rooms/:id", name: "Room", component: Room },
-
+  {
+    path: "/createRoom",
+    component: CreateRoom,
+  },
   { path: "*", redirect: "/" },
 ];
 
