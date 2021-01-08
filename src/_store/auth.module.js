@@ -1,5 +1,6 @@
 import { userService } from "../_services";
 import { router } from "../_helpers";
+import jwt_decode from "jwt-decode";
 
 const user = JSON.parse(localStorage.getItem("user"));
 const token = JSON.parse(localStorage.getItem("token"));
@@ -48,6 +49,8 @@ const mutations = {
   loginSuccess(state, token) {
     state.status = { loggedIn: true };
     state.token = token;
+    let decodedToken = jwt_decode(token);
+    state.user = decodedToken.user;
   },
   loginFailure(state) {
     state.status = {};
