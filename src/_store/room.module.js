@@ -6,6 +6,7 @@ const state = {
   currentRoom: null,
   participants: [],
   roomId: null,
+  createdRoomId: null,
 };
 const actions = {
   fetchRooms({ commit }) {
@@ -44,6 +45,7 @@ const mutations = {
   },
   ADD_ROOM(state, room) {
     state.rooms.push(room);
+    state.createdRoomId = room.id;
   },
   SET_ROOM(state, id) {
     let currentRoom = state.rooms.find((element) => element.id == id);

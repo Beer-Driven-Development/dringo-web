@@ -68,6 +68,7 @@ export default {
   },
   computed: {
     ...mapState("auth", ["status"]),
+    ...mapState("room", ["createdRoomId"]),
   },
   created() {},
   methods: {
@@ -82,6 +83,13 @@ export default {
         name: this.name,
         passcode: this.passcode,
       });
+      console.log(this.createdRoomId);
+      if (this.createdRoomId) {
+        this.$router.push({
+          name: "AddCategories",
+          params: { id: this.createdRoomId },
+        });
+      }
     },
   },
 };

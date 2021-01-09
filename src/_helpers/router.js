@@ -7,6 +7,7 @@ import Home from "@/views/Home";
 import Rooms from "@/views/Rooms";
 import Room from "@/views/Room";
 import CreateRoom from "@/views/CreateRoom";
+import AddCategories from "@/views/AddCategories";
 
 Vue.use(Router);
 
@@ -19,6 +20,11 @@ const routes = [
   {
     path: "/createRoom",
     component: CreateRoom,
+  },
+  {
+    path: "/addCategories",
+    name: "AddCategories",
+    component: AddCategories,
   },
   { path: "*", redirect: "/" },
 ];
