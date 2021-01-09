@@ -18,7 +18,7 @@
       </h2>
       <ul class="m-2">
         <li
-          v-for="pivot in pivots"
+          v-for="pivot in superPivots"
           v-bind:key="pivot.id"
           class="text-indigo-500 font-bold text-xl font-sans"
         >
@@ -66,6 +66,9 @@ export default {
     ...mapState("category", ["categories", "pivots"]),
     roomId: function() {
       return this.$route.params.id;
+    },
+    superPivots: function() {
+      return this.pivots.filter((pivot) => pivot.room.id == this.roomId);
     },
   },
   created() {
