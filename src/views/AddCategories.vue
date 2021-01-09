@@ -1,8 +1,8 @@
 <template>
   <div class="m-32">
-    <label id="listbox-label" class="block text-sm font-medium text-gray-700">
+    <h2 class="font-extrabold text-2xl">
       Choose category
-    </label>
+    </h2>
     <ul class="m-2">
       <li
         v-for="category in categories"
@@ -12,6 +12,28 @@
         <CategoryItem v-bind="{ category: category, roomId: roomId }" />
       </li>
     </ul>
+    <div class="my-16">
+      <h2 class="font-extrabold text-2xl">
+        Chosen categories
+      </h2>
+      <ul class="m-2">
+        <li
+          v-for="pivot in pivots"
+          v-bind:key="pivot.id"
+          class="text-indigo-500 font-bold text-xl font-sans"
+        >
+          <div class="flex flex-row space-x-4">
+            <h3 class="font-sans text-indigo-500">
+              {{ pivot.category.name }}
+            </h3>
+            <p>{{ pivot.weight }}</p>
+            <button @click.prevent="deletePivot(pivot.id)">
+              <i class="fas fa-trash-alt text-red-600"> </i>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -31,11 +53,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions("category", ["fetchCategories"]),
+    ...mapActions("category", ["fetchCategories", "deletePivot"]),
+    deletePivot(pivotId) {
+      this.$store.dispatch("category/deletePivot", {
+        roomId: this.$route.params.id,
+        pivotId: pivotId,
+      });
+    },
   },
 
   computed: {
-    ...mapState("category", ["categories"]),
+    ...mapState("category", ["categories", "pivots"]),
     roomId: function() {
       return this.$route.params.id;
     },

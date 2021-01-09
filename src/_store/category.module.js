@@ -24,6 +24,16 @@ const actions = {
       )
       .then((response) => commit("ADD", response.data));
   },
+  deletePivot({ commit }, payload) {
+    axios
+      .delete(
+        `${process.env.VUE_APP_API_URL}/rooms/${payload.roomId}/categories/${payload.pivotId}`,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(() => commit("DELETE", payload.pivotId));
+  },
 };
 
 const mutations = {
@@ -32,6 +42,9 @@ const mutations = {
   },
   ADD(state, pivot) {
     state.pivots.push(pivot);
+  },
+  DELETE(state, pivotId) {
+    state.pivots = state.pivots.filter((pivot) => pivot.id != pivotId);
   },
 };
 
