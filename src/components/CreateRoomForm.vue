@@ -72,14 +72,16 @@ export default {
   created() {},
   methods: {
     ...mapActions("auth", ["login", "logout"]),
-    ...mapActions("room", ["createRoom"]),
 
     handleCreateRoom() {
-      let payload = {
+      console.log({
         name: this.name,
         passcode: this.passcode,
-      };
-      this.createRoom(payload);
+      });
+      this.$store.dispatch("room/createRoom", {
+        name: this.name,
+        passcode: this.passcode,
+      });
     },
   },
 };

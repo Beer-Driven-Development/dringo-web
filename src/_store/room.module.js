@@ -25,22 +25,25 @@ const actions = {
     commit("JOINED_ROOM", message);
   },
 
-  createRoom({ name, passcode }) {
+  createRoom({ commit }, data) {
     axios
       .post(
         `${process.env.VUE_APP_API_URL}/rooms`,
-        { name: name, passcode: passcode },
+        { name: data.name, passcode: data.passcode },
         {
           headers: authHeader(),
         }
       )
-      .then((response) => console.log(response.data));
+      .then((response) => commit("ADD_ROOM", response.data));
   },
 };
 
 const mutations = {
   FETCH_ROOMS(state, rooms) {
     state.rooms = rooms;
+  },
+  ADD_ROOM(state, room) {
+    state.rooms.push(room);
   },
   SET_ROOM(state, id) {
     let currentRoom = state.rooms.find((element) => element.id == id);
