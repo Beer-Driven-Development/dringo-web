@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div class="flex justify-between">
-      <span class=" block truncate font-bold px-4">
+  <div class="container">
+    <div class="row">
+      <span class=" block truncate col font-bold px-4">
         {{ category.name }}
       </span>
 
-      <select class="flex justify-start" v-model="chosenWeight">
-        <option v-for="weight in weights" :key="weight">{{ weight }}</option>
-      </select>
+      <span class="col">
+        <select v-model="chosenWeight">
+          <option v-for="weight in weights" :key="weight">{{ weight }}</option>
+        </select></span
+      >
 
-      <span class="flex items-center px-4">
+      <span class=" col px-4">
         <button @click.prevent="addCategory">
           <i class="fas fa-plus text-green-600"> </i>
         </button>

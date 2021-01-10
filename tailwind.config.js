@@ -842,6 +842,9 @@ module.exports = {
     divideOpacity: ["responsive"],
     divideStyle: ["responsive"],
     divideWidth: ["responsive"],
+    extend: {
+      opacity: ["disabled"],
+    },
     fill: ["responsive"],
     flex: ["responsive"],
     flexDirection: ["responsive"],

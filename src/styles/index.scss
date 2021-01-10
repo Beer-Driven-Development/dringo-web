@@ -41,7 +41,7 @@ p {
 }
 
 .dringo-btn {
-  @apply bg-indigo-600 shadow-indigo-2xl rounded-full  text-white hover:bg-white text-lg px-16 py-4 font-bold outline-none focus:outline-none transition duration-500 ease-in-out hover:text-indigo-600 hover:bg-white;
+  @apply bg-indigo-600 shadow-indigo-2xl rounded-full  text-white hover:bg-white text-lg px-16 py-4 font-bold outline-none focus:outline-none transition duration-500 ease-in-out hover:text-indigo-600 hover:bg-white disabled:opacity-50;
 }
 
 .logo {

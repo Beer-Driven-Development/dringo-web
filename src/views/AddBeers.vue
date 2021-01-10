@@ -1,20 +1,54 @@
 <template>
-  <div class="container m-32">
+  <div class="m-32">
     <h2 class="font-extrabold text-2xl">
-      Choose category
+      Add beers
     </h2>
-    <ul class="m-2">
-      <li
-        v-for="category in categories"
-        v-bind:key="category.id"
-        class="text-indigo-500 font-bold text-xl font-sans"
-      >
-        <CategoryItem v-bind="{ category: category, roomId: roomId }" />
-      </li>
-    </ul>
+    <form class="container mx-auto px-4" name="contact" method="POST">
+      <div class="flex flex-wrap justify-center">
+        <div class="w-full lg:w-6/12 px-4">
+          <div
+            class="bg-white relative flex flex-col min-w-0 break-words w-full mb-6 shadow-blue-2xl rounded-2xl"
+          >
+            <div class="flex-auto p-5 lg:p-10">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  htmlFor="name"
+                >
+                  Name
+                </label>
+                <input
+                  v-model="name"
+                  name="name"
+                  type="text"
+                  class="input"
+                  placeholder="Name"
+                />
+              </div>
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  htmlFor="abv"
+                >
+                  ABV
+                </label>
+                <input
+                  v-model="password"
+                  name="abv"
+                  type="password"
+                  class="input"
+                  placeholder="ABV"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
     <div class="my-16">
       <h2 class="font-extrabold text-2xl">
-        Chosen categories
+        Added beers
       </h2>
       <ul class="m-2">
         <li
@@ -36,12 +70,8 @@
     </div>
 
     <div class="text-center mt-6">
-      <button
-        class="dringo-btn"
-        :disabled="isDisabled"
-        @click.prevent="handlePublish"
-      >
-        Next
+      <button class="dringo-btn" @click.prevent="handlePublish">
+        Publish
       </button>
     </div>
   </div>
@@ -49,11 +79,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import CategoryItem from "../components/CategoryItem";
 export default {
-  components: {
-    CategoryItem,
-  },
   data() {
     return {
       pivot: {
@@ -79,10 +105,6 @@ export default {
     },
     superPivots: function() {
       return this.pivots.filter((pivot) => pivot.room.id == this.roomId);
-    },
-
-    isDisabled() {
-      return this.superPivots == 0;
     },
   },
   created() {

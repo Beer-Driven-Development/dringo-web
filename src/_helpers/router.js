@@ -8,6 +8,7 @@ import Rooms from "@/views/Rooms";
 import Room from "@/views/Room";
 import CreateRoom from "@/views/CreateRoom";
 import AddCategories from "@/views/AddCategories";
+import AddBeers from "@/views/AddBeers";
 
 Vue.use(Router);
 
@@ -26,6 +27,12 @@ const routes = [
     name: "AddCategories",
     component: AddCategories,
   },
+  {
+    path: "/addBeers",
+    name: "AddBeers",
+    component: AddBeers,
+  },
+
   { path: "*", redirect: "/" },
 ];
 
