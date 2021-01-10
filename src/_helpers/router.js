@@ -13,10 +13,10 @@ import AddBeers from "@/views/AddBeers";
 Vue.use(Router);
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", component: Home, name: "Home" },
   { path: "/login", component: Login },
   { path: "/register", component: Register },
-  { path: "/rooms", component: Rooms },
+  { path: "/rooms", component: Rooms, name: "Rooms" },
   { path: "/rooms/:id", name: "Room", component: Room },
   {
     path: "/createRoom",

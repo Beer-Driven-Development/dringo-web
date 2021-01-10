@@ -83,13 +83,6 @@ export default {
         name: this.name,
         passcode: this.passcode,
       });
-      console.log(this.createdRoomId);
-      if (this.createdRoomId) {
-        this.$router.push({
-          name: "AddCategories",
-          params: { id: this.createdRoomId },
-        });
-      }
     },
   },
 };

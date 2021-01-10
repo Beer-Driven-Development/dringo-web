@@ -39,7 +39,7 @@
       <button
         class="dringo-btn"
         :disabled="isDisabled"
-        @click.prevent="handlePublish"
+        @click.prevent="handleNext"
       >
         Next
       </button>
@@ -68,6 +68,13 @@ export default {
       this.$store.dispatch("category/deletePivot", {
         roomId: this.$route.params.id,
         pivotId: pivotId,
+      });
+    },
+
+    handleNext() {
+      this.$router.push({
+        name: "AddBeers",
+        params: { id: this.roomId },
       });
     },
   },

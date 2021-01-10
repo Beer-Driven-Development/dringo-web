@@ -1,5 +1,6 @@
 import axios from "axios";
 import { authHeader } from "@/_helpers";
+import { router } from "@/_helpers/router";
 
 const state = {
   rooms: [],
@@ -26,6 +27,14 @@ const actions = {
     commit("JOINED_ROOM", message);
   },
 
+  changeStatus({ commit }, payload) {
+    axios
+      .post(`${process.env.VUE_APP_API_URL}/rooms/${payload.roomId}`, payload, {
+        headers: authHeader(),
+      })
+      .then((response) => commit("CHANGE_STATUS", response.data));
+  },
+
   createRoom({ commit }, data) {
     axios
       .post(
@@ -35,7 +44,14 @@ const actions = {
           headers: authHeader(),
         }
       )
-      .then((response) => commit("ADD_ROOM", response.data));
+      .then(function(response) {
+        console.log(response.data.id);
+        commit("ADD_ROOM", response.data);
+        router.push({
+          name: "AddCategories",
+          params: { id: response.data.id },
+        });
+      });
   },
 };
 
@@ -44,8 +60,17 @@ const mutations = {
     state.rooms = rooms;
   },
   ADD_ROOM(state, room) {
+    console.log("ROOM");
+    console.log(room);
     state.rooms.push(room);
+    console.log("createdRoomId");
+    console.log(state.createdRoomId);
     state.createdRoomId = room.id;
+    console.log("RoomID");
+    console.log(room.id);
+
+    console.log("createdRoomId AFTER UPDATE");
+    console.log(state.createdRoomId);
   },
   SET_ROOM(state, id) {
     let currentRoom = state.rooms.find((element) => element.id == id);
@@ -58,6 +83,11 @@ const mutations = {
 
   JOINED_ROOM(state, message) {
     state.roomId = message;
+  },
+
+  CHANGE_STATUS(state, data) {
+    console.log(state);
+    console.log(data);
   },
 };
 
