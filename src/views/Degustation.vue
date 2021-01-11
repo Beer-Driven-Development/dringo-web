@@ -3,15 +3,25 @@
     <div class="flex flex-row space-x-4">
       <h3 class="text-4xl text-indigo-500">{{ beer.name }}</h3>
       <h3 class="text-4xl">{{ `${beer.abv}%` }}</h3>
-      <h3 v-for="pivot in pivots" :key="pivot.id">{{ pivot.category.name }}</h3>
+    </div>
+    <div>
+      <h3 v-for="pivot in pivots" :key="pivot.id">
+        <RatingItem v-bind="{ pivot: pivot, beer: beer }" />
+      </h3>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import RatingItem from "../components/RatingItem";
+
 export default {
   name: "Degustation",
+
+  components: {
+    RatingItem,
+  },
 
   methods: {
     ...mapActions("room", ["setRoom", "start"]),

@@ -7,7 +7,6 @@ import Vuex from "vuex";
 import { store } from "./_store";
 import VueSocketIOExt from "vue-socket.io-extended";
 import io from "socket.io-client";
-
 let socket = undefined;
 
 function initialiseSocket() {

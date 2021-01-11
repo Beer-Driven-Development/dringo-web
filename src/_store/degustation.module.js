@@ -1,3 +1,6 @@
+import axios from "axios";
+import { authHeader } from "@/_helpers";
+
 const state = {
   beer: [],
   pivots: [],
@@ -9,6 +12,17 @@ const actions = {
   setPivots({ commit }, pivots) {
     commit("SET_PIVOTS", pivots);
   },
+  rateBeer({ commit }, payload) {
+    axios
+      .post(
+        `${process.env.VUE_APP_API_URL}/rooms/${payload.roomId}/vote`,
+        payload,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then((response) => commit("RATE_BEER", response.data));
+  },
 };
 
 const mutations = {
@@ -17,6 +31,10 @@ const mutations = {
   },
   SET_PIVOTS(state, pivots) {
     state.pivots = pivots;
+  },
+
+  RATE_BEER() {
+    console.log("xDD");
   },
 };
 
