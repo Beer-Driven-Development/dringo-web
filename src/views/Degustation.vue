@@ -9,6 +9,11 @@
         <RatingItem v-bind="{ pivot: pivot, beer: beer }" />
       </h3>
     </div>
+    <div class="text-center mt-6" v-if="user.id == currentRoom.creator.id">
+      <button class="dringo-btn" @click.prevent="handleNext">
+        Next
+      </button>
+    </div>
   </div>
 </template>
 
@@ -25,16 +30,13 @@ export default {
 
   methods: {
     ...mapActions("room", ["setRoom", "start"]),
+    handleNext() {},
   },
 
   computed: {
     ...mapState("room", ["rooms", "currentRoom", "participants"]),
     ...mapState("auth", ["token", "user"]),
     ...mapState("degustation", ["beer", "pivots"]),
-  },
-
-  created() {
-    this.setRoom(`${this.$route.params.id}`);
   },
 };
 </script>

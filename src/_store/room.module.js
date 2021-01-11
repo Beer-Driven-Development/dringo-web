@@ -69,13 +69,6 @@ const actions = {
       .then(function(response) {
         dispatch("beer/setBeers", response.data.beers, { root: true });
         dispatch("category/setPivots", response.data.pivots, { root: true });
-
-        // emit() tutaj
-
-        // router.push({
-        //   name: "AddCategories",
-        //   params: { id: response.data.id },
-        // });
       });
   },
 };
@@ -98,8 +91,8 @@ const mutations = {
     console.log(state.createdRoomId);
   },
   SET_ROOM(state, id) {
-    let currentRoom = state.rooms.find((element) => element.id == id);
-    state.currentRoom = currentRoom;
+    // let currentRoom = state.rooms.find((element) => element.id == id);
+    state.currentRoom = state.rooms.find((element) => element.id == id);
   },
 
   SET_USERSLIST(state, message) {
@@ -108,6 +101,7 @@ const mutations = {
 
   JOINED_ROOM(state, message) {
     state.roomId = message;
+    state.currentRoom = state.rooms.find((element) => element.id == message);
   },
 
   CHANGE_STATUS(state, data) {
