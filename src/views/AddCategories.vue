@@ -1,7 +1,7 @@
 <template>
   <div class="container m-32">
     <h2 class="font-extrabold text-2xl">
-      Choose category
+      Choose category and weight
     </h2>
     <ul class="m-2">
       <li

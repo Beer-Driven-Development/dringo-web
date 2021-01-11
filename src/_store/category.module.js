@@ -4,8 +4,12 @@ import { authHeader } from "@/_helpers";
 const state = {
   categories: [],
   pivots: [],
+  currentPivots: [],
 };
 const actions = {
+  setPivots({ commit }, pivots) {
+    commit("SET_PIVOTS", pivots);
+  },
   fetchCategories({ commit }) {
     axios
       .get(`${process.env.VUE_APP_API_URL}/categories`, {
@@ -37,6 +41,9 @@ const actions = {
 };
 
 const mutations = {
+  SET_PIVOTS(state, pivots) {
+    state.currentPivots = pivots;
+  },
   FETCH_CATEGORIES(state, categories) {
     categories ? (state.categories = categories) : (state.categories = []);
   },

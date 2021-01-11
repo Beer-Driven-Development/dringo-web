@@ -3,8 +3,13 @@ import { authHeader } from "@/_helpers";
 
 const state = {
   beers: [],
+  currentBeers: [],
 };
 const actions = {
+  setBeers({ commit }, beers) {
+    commit("SET_BEERS", beers);
+  },
+
   add({ commit }, payload) {
     axios
       .post(
@@ -30,6 +35,9 @@ const actions = {
 };
 
 const mutations = {
+  SET_BEERS(state, beers) {
+    state.currentBeers = beers;
+  },
   ADD(state, beer) {
     state.beers.push(beer);
   },

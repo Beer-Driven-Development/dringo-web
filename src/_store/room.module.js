@@ -53,6 +53,27 @@ const actions = {
         });
       });
   },
+  start({ dispatch }, payload) {
+    axios
+      .post(
+        `${process.env.VUE_APP_API_URL}/rooms/${payload.roomId}/start`,
+        { participants: payload.participants },
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(function(response) {
+        dispatch("beer/setBeers", response.data.beers, { root: true });
+        dispatch("category/setPivots", response.data.pivots, { root: true });
+        console.log("POROBIONE TAK O");
+        // emit() tutaj
+
+        // router.push({
+        //   name: "AddCategories",
+        //   params: { id: response.data.id },
+        // });
+      });
+  },
 };
 
 const mutations = {

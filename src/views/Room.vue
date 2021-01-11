@@ -21,6 +21,11 @@
         </p>
       </div>
     </h4>
+    <div class="text-center mt-6" v-if="user.id == currentRoom.creator.id">
+      <button class="dringo-btn" @click.prevent="handleStart">
+        Start
+      </button>
+    </div>
   </div>
 </template>
 
@@ -30,12 +35,18 @@ export default {
   name: "Room",
 
   methods: {
-    ...mapActions("room", ["setRoom"]),
+    ...mapActions("room", ["setRoom", "start"]),
+    handleStart() {
+      this.start({
+        roomId: this.currentRoom.id,
+        participants: this.participants,
+      });
+    },
   },
 
   computed: {
     ...mapState("room", ["rooms", "currentRoom", "participants"]),
-    ...mapState("auth", ["token"]),
+    ...mapState("auth", ["token", "user"]),
   },
 
   created() {
