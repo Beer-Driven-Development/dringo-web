@@ -6,6 +6,8 @@ import Register from "@/views/Register";
 import Home from "@/views/Home";
 import Rooms from "@/views/Rooms";
 import Room from "@/views/Room";
+import Degustation from "@/views/Degustation";
+
 import CreateRoom from "@/views/CreateRoom";
 import AddCategories from "@/views/AddCategories";
 import AddBeers from "@/views/AddBeers";
@@ -31,6 +33,11 @@ const routes = [
     path: "/addBeers",
     name: "AddBeers",
     component: AddBeers,
+  },
+  {
+    name: "Degustation",
+    path: "/degustation",
+    component: Degustation,
   },
 
   { path: "*", redirect: "/" },

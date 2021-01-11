@@ -30,7 +30,12 @@ function initialiseSocket() {
     store.dispatch("room/setUsersList", data);
   });
 
-  socket.emit("joinRoom");
+  socket.on("next", (data) => {
+    console.log(data);
+    store.dispatch("beer/setBeers", data.beers);
+    store.dispatch("category/setPivots", data.pivots);
+    router.push("/degustation");
+  });
 }
 
 initialiseSocket();

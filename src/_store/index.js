@@ -5,6 +5,7 @@ import { auth } from "./auth.module";
 import { room } from "./room.module";
 import { category } from "./category.module";
 import { beer } from "./beer.module";
+import { degustation } from "./degustation.module";
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -16,6 +17,7 @@ export const store = new Vuex.Store({
     room,
     category,
     beer,
+    degustation,
   },
   plugins: [createPersistedState()],
 });

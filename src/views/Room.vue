@@ -36,10 +36,17 @@ export default {
 
   methods: {
     ...mapActions("room", ["setRoom", "start"]),
+    ...mapActions("degustation", ["setPivots", "setBeer"]),
+
     handleStart() {
       this.start({
         roomId: this.currentRoom.id,
         participants: this.participants,
+      });
+
+      this.$socket.client.emit("getDegustation", {
+        id: this.currentRoom.id,
+        token: this.token,
       });
     },
   },
@@ -50,6 +57,15 @@ export default {
   },
 
   created() {
+    this.$socket.client.on("first", (data) => {
+      console.log("JUTRZENKA");
+      console.log(data);
+      this.setBeer(data.beer);
+      this.setPivots(data.pivots);
+      console.log("SŁOŃCE GÓRUJE W ZENICIE");
+      this.$router.push({ name: "Degustation" });
+    });
+
     this.setRoom(`${this.$route.params.id}`);
   },
 };
