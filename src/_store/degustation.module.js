@@ -4,6 +4,7 @@ import { authHeader } from "@/_helpers";
 const state = {
   beer: [],
   pivots: [],
+  stats: null,
 };
 const actions = {
   setBeer({ commit }, beer) {
@@ -23,6 +24,13 @@ const actions = {
       )
       .then((response) => commit("RATE_BEER", response.data));
   },
+  getStats({ commit }, roomId) {
+    axios
+      .post(`${process.env.VUE_APP_API_URL}/rooms/${roomId}/stats`, {
+        headers: authHeader(),
+      })
+      .then((response) => commit("SET_STATS", response.data));
+  },
 };
 
 const mutations = {
@@ -35,6 +43,9 @@ const mutations = {
 
   RATE_BEER() {
     console.log("xDD");
+  },
+  SET_STATS(state, stats) {
+    state.stats = stats;
   },
 };
 

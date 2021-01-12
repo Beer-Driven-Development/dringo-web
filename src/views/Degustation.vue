@@ -14,6 +14,15 @@
         Next
       </button>
     </div>
+    <div class="text-center mt-6">
+      <button
+        class="dringo-btn"
+        @click.prevent="handleStats"
+        :disabled="isDisabled"
+      >
+        Stats
+      </button>
+    </div>
   </div>
 </template>
 
@@ -31,13 +40,20 @@ export default {
   created() {
     this.$socket.client.on("next", (data) => {
       console.log(data);
-      this.setBeer(data.beer);
-      this.setPivots(data.pivots);
+      if (data.beer) {
+        this.setBeer(data.beer);
+        this.setPivots(data.pivots);
+      }
     });
   },
   methods: {
     ...mapActions("room", ["setRoom", "start"]),
-    ...mapActions("degustation", ["setBeer", "setPivots"]),
+    ...mapActions("degustation", ["setBeer", "setPivots", "getStats"]),
+
+    handleStats() {
+      this.getStats(this.currentRoom.id);
+      this.$router.push({ name: "Stats" });
+    },
 
     handleNext() {
       this.$socket.client.emit("next", {
@@ -52,6 +68,9 @@ export default {
     ...mapState("room", ["rooms", "currentRoom", "participants"]),
     ...mapState("auth", ["token", "user"]),
     ...mapState("degustation", ["beer", "pivots"]),
+    isDisabled() {
+      return this.beer == null;
+    },
   },
 };
 </script>
