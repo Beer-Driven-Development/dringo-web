@@ -26,7 +26,7 @@ const actions = {
   },
   getStats({ commit }, roomId) {
     axios
-      .post(`${process.env.VUE_APP_API_URL}/rooms/${roomId}/stats`, {
+      .get(`${process.env.VUE_APP_API_URL}/rooms/${roomId}/stats`, {
         headers: authHeader(),
       })
       .then((response) => commit("SET_STATS", response.data));

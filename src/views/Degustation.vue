@@ -43,6 +43,9 @@ export default {
       if (data.beer) {
         this.setBeer(data.beer);
         this.setPivots(data.pivots);
+      } else {
+        this.setBeer(null);
+        this.setPivots([]);
       }
     });
   },
