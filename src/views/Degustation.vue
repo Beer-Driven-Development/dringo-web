@@ -28,9 +28,24 @@ export default {
     RatingItem,
   },
 
+  created() {
+    this.$socket.client.on("next", (data) => {
+      console.log(data);
+      this.setBeer(data.beer);
+      this.setPivots(data.pivots);
+    });
+  },
   methods: {
     ...mapActions("room", ["setRoom", "start"]),
-    handleNext() {},
+    ...mapActions("degustation", ["setBeer", "setPivots"]),
+
+    handleNext() {
+      this.$socket.client.emit("next", {
+        roomId: this.currentRoom.id,
+        beerId: this.beer.id,
+        token: this.token,
+      });
+    },
   },
 
   computed: {

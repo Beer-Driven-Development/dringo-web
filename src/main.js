@@ -28,13 +28,6 @@ function initialiseSocket() {
     console.log("usersList");
     store.dispatch("room/setUsersList", data);
   });
-
-  socket.on("next", (data) => {
-    console.log(data);
-    store.dispatch("beer/setBeers", data.beers);
-    store.dispatch("category/setPivots", data.pivots);
-    router.push("/degustation");
-  });
 }
 
 initialiseSocket();
