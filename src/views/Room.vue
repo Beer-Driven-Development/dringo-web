@@ -26,6 +26,12 @@
         Start
       </button>
     </div>
+
+    <div class="text-center mt-6">
+      <button class="dringo-btn" @click.prevent="handleLeave">
+        Leave
+      </button>
+    </div>
   </div>
 </template>
 
@@ -48,6 +54,16 @@ export default {
         id: this.currentRoom.id,
         token: this.token,
       });
+    },
+
+    handleLeave() {
+      this.$socket.client.emit("leaveRoom", {
+        id: this.currentRoom.id,
+        email: this.user.email,
+        token: this.token,
+      });
+
+      this.$router.push({ name: "Rooms" });
     },
   },
 
