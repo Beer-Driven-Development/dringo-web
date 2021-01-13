@@ -11,6 +11,7 @@ import Degustation from "@/views/Degustation";
 import CreateRoom from "@/views/CreateRoom";
 import AddCategories from "@/views/AddCategories";
 import AddBeers from "@/views/AddBeers";
+import Stats from "@/views/Stats";
 
 Vue.use(Router);
 
@@ -38,6 +39,11 @@ const routes = [
     name: "Degustation",
     path: "/degustation",
     component: Degustation,
+  },
+  {
+    name: "Stats",
+    path: "/stats",
+    component: Stats,
   },
 
   { path: "*", redirect: "/" },

@@ -14,6 +14,15 @@
         Next
       </button>
     </div>
+    <div class="text-center mt-6">
+      <button
+        class="dringo-btn"
+        @click.prevent="handleStats"
+        :disabled="isDisabled"
+      >
+        Stats
+      </button>
+    </div>
   </div>
 </template>
 
@@ -28,15 +37,43 @@ export default {
     RatingItem,
   },
 
+  created() {
+    this.$socket.client.on("next", (data) => {
+      console.log(data);
+      if (data.beer) {
+        this.setBeer(data.beer);
+        this.setPivots(data.pivots);
+      } else {
+        this.setBeer(null);
+        this.setPivots([]);
+      }
+    });
+  },
   methods: {
     ...mapActions("room", ["setRoom", "start"]),
-    handleNext() {},
+    ...mapActions("degustation", ["setBeer", "setPivots", "getStats"]),
+
+    handleStats() {
+      this.getStats(this.currentRoom.id);
+      this.$router.push({ name: "Stats" });
+    },
+
+    handleNext() {
+      this.$socket.client.emit("next", {
+        roomId: this.currentRoom.id,
+        beerId: this.beer.id,
+        token: this.token,
+      });
+    },
   },
 
   computed: {
     ...mapState("room", ["rooms", "currentRoom", "participants"]),
     ...mapState("auth", ["token", "user"]),
     ...mapState("degustation", ["beer", "pivots"]),
+    isDisabled() {
+      return this.beer == null;
+    },
   },
 };
 </script>
